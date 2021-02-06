@@ -1,0 +1,121 @@
+DELETE FROM videos WHERE id = :videoId
+DELETE FROM thumbnails WHERE videoId = :videoId
+DELETE FROM likes WHERE videoId = :videoId
+DELETE FROM dislikes WHERE videoId = :videoId
+DELETE FROM comments WHERE videoId = :videoId
+
+//=========================
+
+classes/Comment.php{
+
+like() "INSERT INTO likes(username, commentId, videoId) VALUES (:username, :commentId, :videoId)"
+dislike() "INSERT INTO dislikes(username, commentId, videoId) VALUES (:username, :commentId, :videoId)"
+
+}
+
+//=========================
+
+classes/Video.php{
+
+getLikes() "SELECT count(*) as 'count' FROM likes WHERE videoId=:videoId AND commentId=0"
+getDislikes() "SELECT count(*) as 'count' FROM dislikes WHERE videoId=:videoId AND commentId=0"
+like() "DELETE FROM likes WHERE username=:username AND videoId=:videoId AND commentId=0"
+dislike() "DELETE FROM dislikes WHERE username=:username AND videoId=:videoId AND commentId=0"
+wasLikedBy() "SELECT * FROM likes WHERE username=:username AND videoId=:videoId AND commentId=0"
+wasDislikedBy() "SELECT * FROM dislikes WHERE username=:username AND videoId=:videoId AND commentId=0"
+
+}
+
+//=========================
+
+classes/Video.php{
+        public function deleteVideo(){
+            $successCount = 0;
+            $successCount += $this->deleteVideoFile();
+            $successCount += $this->deleteVideoThumbnails();
+            $successCount += $this->deleteVideoInfo();
+            
+            return $successCount==3;
+        }
+
+        private function deleteVideoInfo(){
+            $videoId = $this->getId();
+            $successCount = 0;
+
+            $query = $this->con->prepare("DELETE FROM videos WHERE id=:videoId");
+            $query->bindParam(":videoId", $videoId);
+            $successCount += $query->execute();
+
+            $query = $this->con->prepare("DELETE FROM thumbnails WHERE videoId=:videoId");
+            $query->bindParam(":videoId", $videoId);
+            $successCount += $query->execute();
+
+            $query = $this->con->prepare("DELETE FROM likes WHERE videoId=:videoId");
+            $query->bindParam(":videoId", $videoId);
+            $successCount += $query->execute();
+
+            $query = $this->con->prepare("DELETE FROM dislikes WHERE videoId=:videoId");
+            $query->bindParam(":videoId", $videoId);
+            $successCount += $query->execute();
+
+            $query = $this->con->prepare("DELETE FROM comments WHERE videoId=:videoId");
+            $query->bindParam(":videoId", $videoId);
+            $successCount += $query->execute();
+
+            return $successCount==5;
+        }
+
+        private function deleteVideoFile(){
+            $videoId = $this->getId();
+
+            $query = $this->con->prepare("SELECT * FROM videos WHERE id=:videoId");
+            $query->bindParam(":videoId", $videoId);
+            $query->execute();
+
+            $data = $query->fetch(PDO::FETCH_ASSOC);
+            $path = $data["filePath"];
+            return unlink("$path");
+        }
+
+        private function deleteVideoThumbnails(){
+            $videoId = $this->getId();
+            $successCount = 0;
+
+            $query = $this->con->prepare("SELECT * FROM thumbnails WHERE videoId=:videoId");
+            $query->bindParam(":videoId", $videoId);
+            $query->execute();
+
+            while($row = $query->fetch(PDO::FETCH_ASSOC)){
+                $path = $row["filePath"];
+                $successCount += unlink("$path");
+            }
+            return $successCount==3;
+        }
+}
+
+
+//=========================
+
+classes/VideoDetailsFormProvider.php{
+
+    createEditDetailsForm($video){
+      $deleteButton = $this->createDeleteButton();  
+    } 
+
+
+    private function createDeleteButton(){
+    			return "<button type='submit' class='btn btn-danger' name='deleteButton' onclick=\"return confirm('Are you sure you want to do that?');\">Delete</button>";
+    		}
+    }
+
+
+editVideo.php{
+        if(isset($_POST["deleteButton"])){
+    		if($video->deleteVideo()){
+    			header("Location: index.php");
+    		}else{
+    			echo "Something went wrong!";
+    			exit();
+    		}
+    	}
+}
