@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1:3306
--- 產生時間： 2020-09-08 01:01:48
+-- 產生時間： 2021-03-17 07:10:10
 -- 伺服器版本： 5.7.31
 -- PHP 版本： 7.3.21
 
@@ -72,18 +72,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `body` text NOT NULL,
   `datePosted` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
-
---
--- 傾印資料表的資料 `comments`
---
-
-INSERT INTO `comments` (`id`, `postedBy`, `videoId`, `responseTo`, `body`, `datePosted`) VALUES
-(47, 'kenny', 26, 46, 'reply 4', '2020-09-04 03:40:43'),
-(46, 'kenny', 26, 45, 'reply 3', '2020-09-04 03:38:07'),
-(45, 'kenny', 26, 44, 'reply 2', '2020-09-04 03:37:49'),
-(44, 'kenny', 26, 43, 'reply 1', '2020-09-04 03:23:09'),
-(43, 'kenny', 26, 0, 'comment 1', '2020-09-04 03:23:03');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -98,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `dislikes` (
   `commentId` int(11) DEFAULT '0',
   `videoId` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -113,14 +102,7 @@ CREATE TABLE IF NOT EXISTS `likes` (
   `commentId` int(11) DEFAULT '0',
   `videoId` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
-
---
--- 傾印資料表的資料 `likes`
---
-
-INSERT INTO `likes` (`id`, `username`, `commentId`, `videoId`) VALUES
-(60, 'kenny', 0, 26);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -134,14 +116,7 @@ CREATE TABLE IF NOT EXISTS `subscribers` (
   `userTo` varchar(50) NOT NULL,
   `userFrom` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-
---
--- 傾印資料表的資料 `subscribers`
---
-
-INSERT INTO `subscribers` (`id`, `userTo`, `userFrom`) VALUES
-(10, 'imsohappysc', 'kenny');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -156,19 +131,7 @@ CREATE TABLE IF NOT EXISTS `thumbnails` (
   `filePath` varchar(250) NOT NULL,
   `selected` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
-
---
--- 傾印資料表的資料 `thumbnails`
---
-
-INSERT INTO `thumbnails` (`id`, `videoId`, `filePath`, `selected`) VALUES
-(41, 27, 'uploads/videos/thumbnails/27-5f4d059540415.jpg', 0),
-(40, 27, 'uploads/videos/thumbnails/27-5f4d05951094a.jpg', 1),
-(39, 26, 'uploads/videos/thumbnails/26-5f3a4d0349229.jpg', 0),
-(38, 26, 'uploads/videos/thumbnails/26-5f3a4d0308d38.jpg', 0),
-(37, 26, 'uploads/videos/thumbnails/26-5f3a4d02cb83e.jpg', 1),
-(42, 27, 'uploads/videos/thumbnails/27-5f4d05958261f.jpg', 0);
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -187,15 +150,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `signUpDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `profilePic` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
---
--- 傾印資料表的資料 `users`
---
-
-INSERT INTO `users` (`id`, `firstName`, `lastName`, `username`, `email`, `password`, `signUpDate`, `profilePic`) VALUES
-(4, 'As2', 'Kenny', 'kenny', 'Kenny@gmail.com', '31c3b399ce32e167614b21361856e1e053faa9ef00a16c08c4d457a5f3cc4c99be818431218ca98214f227e6903f590c7a5434873d7904f96ddb40dcc06dfccd', '2020-08-31 22:13:02', 'assets/images/profilePictures/default.png'),
-(3, 'Kevin', 'Chen', 'imsohappysc', 'jwsh09910062@gmail.com', '23fbac6b3405059d6ee1fca952f76746a3c2a6199e50ca1fd26d50c108dcd05141663dc28b540218fe21b529c845b60afd9c9431ccd53c9c30c3e239d6d011c6', '2020-08-15 00:57:40', 'assets/images/profilePictures/default-male.png');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -216,15 +171,7 @@ CREATE TABLE IF NOT EXISTS `videos` (
   `views` int(11) NOT NULL DEFAULT '0',
   `duration` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
-
---
--- 傾印資料表的資料 `videos`
---
-
-INSERT INTO `videos` (`id`, `uploadedBy`, `title`, `description`, `privacy`, `filePath`, `category`, `uploadDate`, `views`, `duration`) VALUES
-(27, 'kenny', 'kenny', 'kenny\'s car', 1, 'uploads/videos/5f4d05911db4a.mp4', 2, '2020-08-31 22:13:37', 23, '00:08'),
-(26, 'imsohappysc', 'cars', 'my car', 1, 'uploads/videos/5f3a4cfedc372.mp4', 2, '2020-08-17 17:25:18', 344, '00:08');
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
