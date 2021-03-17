@@ -4,7 +4,7 @@ A YouTube clone PHP website. (without framework)
 # Setup
 | 7.3.21 | 5.7.31
 |:---:|:---:|
-<img src="reference/php_icon.png" width="128"/> | <img src="reference/mysql_icon.png" width="128"/>
+<img src="reference/php_icon.png" width="64"/> | <img src="reference/mysql_icon.png" width="64"/>
 
 #### Import database
 ```
