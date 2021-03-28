@@ -8,14 +8,14 @@ A YouTube clone PHP website. (without framework)
 
 #### Import database
 ```
-// default_filepath: "VideoTube/reference/videotube.sql"
+// default_path: "VideoTube/reference/videotube.sql"
 mysql -u [your_mysql_username] -p < [file_path]
 ```
 
-#### Setting config
+#### Setting environment variable
 ```
-// default_config_path: "VideoTube/includes/config.php"
-$con = new PDO("mysql:dbname=VideoTube;host=localhost", "root", "");
+// default_path: "VideoTube/includes/.env-example"
+// Change filename ".env-example" to ".env"
 ```
 
 # Preview
