@@ -12,7 +12,13 @@ cd /VideoTube/reference/
 mysql -u [your_db_username] -p < videotube.sql
 ```
 
-#### Step2 - setup .env file
+#### Step2 - install composer packages
+```
+cd /VideoTube/
+composer install
+```
+
+#### Step3 - setup .env file
 ```
 cd /VideoTube/includes/
 change the filename from ".env-example" to ".env"
