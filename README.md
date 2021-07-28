@@ -6,16 +6,17 @@ A YouTube clone PHP website. (without framework)
 |:---:|:---:|
 <img src="reference/php_icon.png" width="64"/> | <img src="reference/mysql_icon.png" width="64"/>
 
-#### Import database
+#### Step1 import sql file
 ```
-// default_path: "VideoTube/reference/videotube.sql"
-mysql -u [your_mysql_username] -p < [file_path]
+cd /VideoTube/reference/
+mysql -u [your_db_username] -p < videotube.sql
 ```
 
-#### Setting environment variable
+#### Step2 setup .env file
 ```
-// default_path: "VideoTube/includes/.env-example"
-// Change filename ".env-example" to ".env"
+cd /VideoTube/includes/
+change filename ".env-example" to ".env"
+Setup your .env file
 ```
 
 # Preview
