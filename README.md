@@ -1,5 +1,6 @@
 # VideoTube
-A YouTube clone PHP website. (without framework)
+A PHP YouTube clone website.
+https://www.udemy.com/course/youtube-clone/
 
 # Setup
 | 7.3.21 | 5.7.31
@@ -12,7 +13,7 @@ cd /VideoTube/reference/
 mysql -u [your_db_username] -p < videotube.sql
 ```
 
-#### Step2 - install composer packages
+#### Step2 - install composer packages (just for .env file)
 ```
 cd /VideoTube/
 composer install
