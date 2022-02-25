@@ -9,21 +9,19 @@ https://www.udemy.com/course/youtube-clone/
 
 #### Step1 - import sql file
 ```
-cd /VideoTube/reference/
+cd reference
 mysql -u [your_db_username] -p < videotube.sql
 ```
 
-#### Step2 - install composer packages (just for .env file)
+#### Step2 - setup config file
 ```
-cd /VideoTube/
-composer install
-```
+cp includes/config-example.php config.php
 
-#### Step3 - setup .env file
-```
-cd /VideoTube/includes/
-change the filename from ".env-example" to ".env"
-Setup your .env file
+# config.php (example)
+	define('DB_HOST', 'localhost');
+	define('DB_NAME', 'videotube');
+	define('DB_USERNAME', 'root');
+	define('DB_PASSWORD', '');
 ```
 
 # Preview

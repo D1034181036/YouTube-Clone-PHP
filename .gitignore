@@ -1,5 +1,2 @@
-.env
-composer.phar
-/vendor/
-/vendor/*
 /uploads/*
+/includes/config.php
