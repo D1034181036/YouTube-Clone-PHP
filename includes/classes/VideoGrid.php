@@ -30,7 +30,7 @@
 		}
 
 		public function generateItems(){
-			$query = $this->con->prepare("SELECT * FROM videos ORDER BY RAND() LIMIT 15");
+			$query = $this->con->prepare("SELECT * FROM videos ORDER BY id DESC LIMIT 30");
 			$query->execute();
 
 			$elementHtml = "";
